@@ -1,0 +1,26 @@
+{
+  "name": "learning-typescript",
+  "version": "1.0.0",
+  "description": "A simple sample application written in Typescript",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmsstudio/learning-typescript.git"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "jmsstudio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jmsstudio/learning-typescript/issues"
+  },
+  "homepage": "https://github.com/jmsstudio/learning-typescript#readme",
+  "devDependencies": {
+    "typescript": "^3.0.3"
+  }
+}
