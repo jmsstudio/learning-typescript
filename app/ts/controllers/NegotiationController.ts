@@ -1,18 +1,22 @@
 class NegotiationController {
-  private dateInput;
-  private amountInput;
-  private valueInput;
+  private _dateInput: HTMLInputElement;
+  private _amountInput: HTMLInputElement;
+  private _valueInput: HTMLInputElement;
 
   constructor() {
-    this.dateInput = document.getElementById('date');
-    this.amountInput = document.getElementById('amount');
-    this.valueInput = document.getElementById('value');
+    this._dateInput = <HTMLInputElement>document.getElementById('date');
+    this._amountInput = <HTMLInputElement>document.getElementById('amount');
+    this._valueInput = <HTMLInputElement>document.getElementById('value');
   }
 
-  add(event) {
+  add(event: Event) {
     event.preventDefault();
 
-    const negotiation = new Negotiation(this.dateInput.value, this.amountInput.value, this.valueInput.value);
+    const negotiation = new Negotiation(
+      new Date(this._dateInput.value.replace(/-/g, ',')),
+      parseInt(this._amountInput.value),
+      parseFloat(this._valueInput.value)
+    );
     console.log(negotiation);
   }
 }
