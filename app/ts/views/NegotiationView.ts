@@ -1,14 +1,4 @@
-class NegotiationView {
-  private element: Element;
-
-  constructor(elementSelector: string) {
-    this.element = document.querySelector(elementSelector);
-  }
-
-  update(negotiations: NegotiationList) {
-    this.element.innerHTML = this.template(negotiations);
-  }
-
+class NegotiationView extends View<NegotiationList> {
   template(negotiations: NegotiationList) {
     return `
     <table class="table table-hover table-bordered">
