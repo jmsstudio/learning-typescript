@@ -1,4 +1,6 @@
-class NegotiationList {
+import { Negotiation } from './Negotiation';
+
+export class NegotiationList {
   private negotiations: Array<Negotiation> = [];
 
   add(negotiation: Negotiation): void {
