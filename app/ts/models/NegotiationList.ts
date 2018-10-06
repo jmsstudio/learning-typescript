@@ -8,6 +8,6 @@ export class NegotiationList {
   }
 
   list(): Negotiation[] {
-    return [].concat(this.negotiations);
+    return ([] as Negotiation[]).concat(this.negotiations);
   }
 }
