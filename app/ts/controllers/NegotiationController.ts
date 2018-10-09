@@ -1,8 +1,9 @@
 import { NegotiationList } from '../models/NegotiationList';
 import { Negotiation } from '../models/Negotiation';
 import { NegotiationView, MessageView } from '../views/index';
-import { LogExecutionTime } from '../helpers/decorators/LogExecutionTime';
-import { InjectDomElement } from '../helpers/decorators/InjectDomElement';
+import { LogExecutionTime, InjectDomElement, Throttle } from '../helpers/decorators/index';
+import { SynchronizationService } from '../services/SynchronizationService';
+import { IPartialNegotiation } from '../models/IPartialNegotiation';
 
 export class NegotiationController {
   @InjectDomElement('#date')
@@ -20,6 +21,7 @@ export class NegotiationController {
   }
 
   @LogExecutionTime()
+  @Throttle(500)
   add(event: Event) {
     event.preventDefault();
 
@@ -45,6 +47,33 @@ export class NegotiationController {
 
   private isWeekend(date: Date): boolean {
     return date.getDay() == DayOfWeek.Sunday || date.getDay() == DayOfWeek.Saturday;
+  }
+
+  private _isOk(response: Response): Response {
+    let ret = null;
+
+    if (response.ok) {
+      ret = response;
+    } else {
+      throw new Error(response.statusText);
+    }
+
+    return ret;
+  }
+
+  @Throttle(500)
+  async importData() {
+    const response = await new SynchronizationService().loadData(this._isOk);
+    try {
+      const responseData: IPartialNegotiation[] = await response.json();
+      responseData
+        .map(data => new Negotiation(new Date(), data.times, data.price))
+        .forEach(negotiation => this._negotiations.add(negotiation));
+
+      this._negotiationView.update(this._negotiations);
+    } catch (err) {
+      console.error(err.message);
+    }
   }
 }
 
