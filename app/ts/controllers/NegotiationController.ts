@@ -4,6 +4,7 @@ import { NegotiationView, MessageView } from '../views/index';
 import { LogExecutionTime, InjectDomElement, Throttle } from '../helpers/decorators/index';
 import { SynchronizationService } from '../services/SynchronizationService';
 import { IPartialNegotiation } from '../models/IPartialNegotiation';
+import { printString } from '../helpers/Utils';
 
 export class NegotiationController {
   @InjectDomElement('#date')
@@ -40,6 +41,8 @@ export class NegotiationController {
     );
 
     this._negotiations.add(negotiation);
+
+    printString(this._negotiations);
 
     this._negotiationView.update(this._negotiations);
     this._messageView.update('Negotiation added sucessfully!');
