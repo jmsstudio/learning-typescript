@@ -1,3 +1,3 @@
-export abstract class Printable {
-  abstract asString(): string;
+export interface Printable {
+  asString(): string;
 }

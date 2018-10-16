@@ -1,9 +1,7 @@
 import { Printable } from './Printable';
 
-export class Negotiation extends Printable {
-  constructor(readonly date: Date, readonly amount: number, readonly value: number) {
-    super();
-  }
+export class Negotiation implements Printable {
+  constructor(readonly date: Date, readonly amount: number, readonly value: number) {}
 
   get volume() {
     return this.value * this.amount;
