@@ -1,7 +1,6 @@
-import { Printable } from './Printable';
-import { Comparable } from './Comparable';
+import { PrintableAndComparable } from './PrintableAndComparable';
 
-export class Negotiation implements Printable, Comparable<Negotiation> {
+export class Negotiation implements PrintableAndComparable<Negotiation> {
   constructor(readonly date: Date, readonly amount: number, readonly value: number) {}
 
   get volume() {

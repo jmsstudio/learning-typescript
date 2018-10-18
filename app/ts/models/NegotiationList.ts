@@ -1,8 +1,7 @@
 import { Negotiation } from './Negotiation';
-import { Printable } from './Printable';
-import { Comparable } from './Comparable';
+import { PrintableAndComparable } from './PrintableAndComparable';
 
-export class NegotiationList implements Printable, Comparable<NegotiationList> {
+export class NegotiationList implements PrintableAndComparable<NegotiationList> {
   private negotiations: Array<Negotiation> = [];
 
   add(negotiation: Negotiation): void {
