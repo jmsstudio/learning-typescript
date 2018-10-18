@@ -69,8 +69,12 @@ export class NegotiationController {
     const response = await new SynchronizationService().loadData(this._isOk);
     try {
       const responseData: IPartialNegotiation[] = await response.json();
+
+      const importedNegotiations = this._negotiations.list();
+
       responseData
         .map(data => new Negotiation(new Date(), data.times, data.price))
+        .filter(negotiation => !importedNegotiations.some(importedNeg => importedNeg.isEqual(negotiation)))
         .forEach(negotiation => this._negotiations.add(negotiation));
 
       this._negotiationView.update(this._negotiations);

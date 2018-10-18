@@ -1,4 +1,4 @@
-import { Printable } from '../models/Printable';
+import { Printable } from '../models/index';
 
 export function printString(...objects: Printable[]): void {
   console.log('=== Printing data ===');
